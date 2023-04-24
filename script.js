@@ -7,19 +7,22 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
   this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
+    return `Title: ${title}, Author: ${author}, Number of Pages: ${pages}, Read: ${read}`;
   };
 }
 
-// Adding new Book function + EventListener
+// Adding new Book function + initializing variables + EventListener
 function addBookToLibrary(title, author, pages, read) {
+  // if (title === '' || author === '' || pages === '' || read === '') {
+  //   alert('Please fill out every field to add a new book');
+  // } else {
   const newBook = new Book(`${title}`, `${author}`, `${pages}`, `${read}`);
   myLibrary.push(newBook);
   updateLibrary();
-  console.log('done');
 }
+// }
 
-const btn = document.querySelector('button');
+const btn = document.getElementById('add');
 const title = document.getElementById('title');
 const author = document.getElementById('author');
 const pages = document.getElementById('pages');
@@ -39,6 +42,17 @@ function updateLibrary() {
     const item = document.createElement('div');
     item.classList.add('card');
     item.textContent = `${book.info()}`;
+
+    const container = document.createElement('div');
+    container.classList.add('container');
+    const remove = document.createElement('button');
+    remove.classList.add('remove');
+    remove.textContent = '🚮';
+    remove.setAttribute('onclick', 'remove()');
+
+    container.appendChild(remove);
+    item.appendChild(container);
+
     bookshelf.appendChild(item);
   });
 }
