@@ -29,3 +29,13 @@ btn.addEventListener('click', () => { addBookToLibrary(`${title.value}`, `${auth
 // First Book
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read yet');
 myLibrary.push(theHobbit);
+
+// Show books information from library
+const bookshelf = document.querySelector('main');
+
+myLibrary.forEach((book) => {
+  const item = document.createElement('div');
+  item.classList.add('card');
+  item.textContent = `${book.info()}`;
+  bookshelf.appendChild(item);
+});
