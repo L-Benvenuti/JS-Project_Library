@@ -15,6 +15,7 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(`${title}`, `${author}`, `${pages}`, `${read}`);
   myLibrary.push(newBook);
+  updateLibrary();
   console.log('done');
 }
 
@@ -31,11 +32,13 @@ const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read yet'
 myLibrary.push(theHobbit);
 
 // Show books information from library
-const bookshelf = document.querySelector('main');
-
-myLibrary.forEach((book) => {
-  const item = document.createElement('div');
-  item.classList.add('card');
-  item.textContent = `${book.info()}`;
-  bookshelf.appendChild(item);
-});
+function updateLibrary() {
+  const bookshelf = document.querySelector('main');
+  bookshelf.innerHTML = '';
+  myLibrary.forEach((book) => {
+    const item = document.createElement('div');
+    item.classList.add('card');
+    item.textContent = `${book.info()}`;
+    bookshelf.appendChild(item);
+  });
+}
