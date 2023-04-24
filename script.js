@@ -13,14 +13,14 @@ function Book(title, author, pages, read) {
 
 // Adding new Book function + initializing variables + EventListener
 function addBookToLibrary(title, author, pages, read) {
-  // if (title === '' || author === '' || pages === '' || read === '') {
-  //   alert('Please fill out every field to add a new book');
-  // } else {
-  const newBook = new Book(`${title}`, `${author}`, `${pages}`, `${read}`);
-  myLibrary.push(newBook);
-  updateLibrary();
+  if (title === '' || author === '' || pages === '' || read === '') {
+    alert('Please fill out every field to add a new book');
+  } else {
+    const newBook = new Book(`${title}`, `${author}`, `${pages}`, `${read}`);
+    myLibrary.push(newBook);
+    updateLibrary();
+  }
 }
-// }
 
 const btn = document.getElementById('add');
 const title = document.getElementById('title');
@@ -45,14 +45,23 @@ function updateLibrary() {
 
     const container = document.createElement('div');
     container.classList.add('container');
-    const remove = document.createElement('button');
-    remove.classList.add('remove');
-    remove.textContent = '🚮';
-    remove.setAttribute('onclick', 'remove()');
+    const removebtn = document.createElement('button');
+    removebtn.classList.add('remove');
+    removebtn.textContent = '🚮';
+    removebtn.setAttribute('onclick', `remove('${book.title}')`);
 
-    container.appendChild(remove);
+    container.appendChild(removebtn);
     item.appendChild(container);
 
     bookshelf.appendChild(item);
   });
+}
+
+function remove(rmBook) {
+  const index = myLibrary.findIndex((item) => item.title === rmBook);
+  if (index > -1) {
+    myLibrary.splice(index, 1);
+  }
+
+  updateLibrary();
 }
